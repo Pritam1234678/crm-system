@@ -66,12 +66,9 @@ public class EmailSettingsController {
             return "error/not-found";
         }
 
+        // Remove Google OAuth functionality - simplified authentication
+        boolean isGoogleUser = false;
         boolean gmailAccess = false;
-        boolean isGoogleUser = !(authentication instanceof UsernamePasswordAuthenticationToken);
-        if (isGoogleUser) {
-            OAuthUser oAuthUser = authenticationUtils.getOAuthUserFromAuthentication(authentication);
-            gmailAccess = authenticationUtils.checkIfAppHasAccess("https://www.googleapis.com/auth/gmail.modify", oAuthUser);
-        }
 
         List<String> notifications = DatabaseUtil.getColumnNames(entityManager, foundClass.get());
         Map<String, String> namesAndFields = new HashMap<>();

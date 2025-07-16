@@ -6,13 +6,10 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Component;
 import site.easy.to.build.crm.entity.CustomerLoginInfo;
-import site.easy.to.build.crm.entity.OAuthUser;
 import site.easy.to.build.crm.entity.User;
 import site.easy.to.build.crm.service.customer.CustomerLoginInfoService;
-import site.easy.to.build.crm.service.user.OAuthUserService;
 import site.easy.to.build.crm.service.user.UserService;
 
 
@@ -20,27 +17,17 @@ import site.easy.to.build.crm.service.user.UserService;
 public class AuthenticationUtils {
 
     private final UserService userService;
-    private final OAuthUserService oAuthUserService;
     private final CustomerLoginInfoService customerLoginInfoService;
     private final UserDetailsService crmUserDetails;
     private final UserDetailsService customerUserDetails;
 
     @Autowired
-    public AuthenticationUtils(UserService userService, OAuthUserService oAuthUserService, CustomerLoginInfoService customerLoginInfoService,
+    public AuthenticationUtils(UserService userService, CustomerLoginInfoService customerLoginInfoService,
                                UserDetailsService crmUserDetails, UserDetailsService customerUserDetails) {
         this.userService = userService;
-        this.oAuthUserService = oAuthUserService;
         this.customerLoginInfoService = customerLoginInfoService;
         this.crmUserDetails = crmUserDetails;
         this.customerUserDetails = customerUserDetails;
-    }
-
-    public OAuthUser getOAuthUserFromAuthentication(Authentication authentication) {
-        if(oAuthUserService == null){
-            return null;
-        }
-        String email = ((OAuth2User)authentication.getPrincipal()).getAttribute("email");
-        return oAuthUserService.findBtEmail(email);
     }
 
     public int getLoggedInUserId(Authentication authentication) {
@@ -62,18 +49,8 @@ public class AuthenticationUtils {
                 }
                 return customerLoginInfo.getId();
             }
-        } else {
-            OAuthUser oAuthUser = getOAuthUserFromAuthentication(authentication);
-            if (oAuthUser == null) {
-                return -1;
-            }
-            user = oAuthUser.getUser();
-            return user.getId();
         }
         return -1;
-    }
-    public boolean checkIfAppHasAccess(String serviceAccessUrl, OAuthUser oAuthUser) {
-        return oAuthUser.getGrantedScopes().contains(serviceAccessUrl);
     }
 
     public UserDetailsService getAuthenticatedUserDetailsService(Authentication authentication) {
