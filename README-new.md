@@ -9,6 +9,7 @@ A comprehensive Customer Relationship Management (CRM) system built with Spring 
 - **Contract Management**: Handle contracts with automated workflows
 - **Ticket System**: Customer support ticket management
 - **Email Templates**: Customizable email templates for automated communications
+- **Google Integration**: OAuth2 login and Google Drive integration
 - **File Management**: Upload and manage files for leads and contracts
 - **User Roles**: Manager, Employee, and Customer role-based access
 - **Dashboard**: Comprehensive dashboard with analytics
@@ -19,7 +20,7 @@ A comprehensive Customer Relationship Management (CRM) system built with Spring 
 - **Backend**: Spring Boot 3.1.0, Spring Security, Spring Data JPA
 - **Database**: MySQL 8.0
 - **Frontend**: Thymeleaf, Bootstrap, JavaScript
-- **Authentication**: Spring Security with form-based authentication
+- **Authentication**: Spring Security with OAuth2 (Google)
 - **Build Tool**: Maven
 - **Java Version**: 17+
 
@@ -34,7 +35,7 @@ A comprehensive Customer Relationship Management (CRM) system built with Spring 
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/Pritam1234678/crm-system.git
+   git clone https://github.com/yourusername/crm-system.git
    cd crm-system
    ```
 
@@ -49,12 +50,18 @@ A comprehensive Customer Relationship Management (CRM) system built with Spring 
    SQL_PASSWORD=your_mysql_password
    ```
 
-4. **Run the application**
+4. **Google OAuth2 Setup (Optional)**
+   - Create a Google Cloud Console project
+   - Enable Google+ API
+   - Create OAuth2 credentials
+   - Update `application.properties` with your client ID and secret
+
+5. **Run the application**
    ```bash
    ./mvnw spring-boot:run
    ```
 
-5. **Access the application**
+6. **Access the application**
    - Open your browser and navigate to `http://localhost:8080`
 
 ## 🏗️ Project Structure
@@ -145,12 +152,12 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👥 Authors
 
-- **Pritam** - *Initial work* - [Pritam1234678](https://github.com/Pritam1234678)
+- **Your Name** - *Initial work* - [YourGitHub](https://github.com/yourusername)
 
 ## 🆘 Support
 
 If you encounter any issues or have questions, please:
-1. Check the [Issues](https://github.com/Pritam1234678/crm-system/issues) page
+1. Check the [Issues](https://github.com/yourusername/crm-system/issues) page
 2. Create a new issue if your problem isn't already documented
 3. Provide detailed information about your environment and the issue
 
